@@ -10,7 +10,7 @@ Next, you will need to obtain polyglot opening books for the player and opponent
 
 For the opponent, I recommend a high-variance book that still has a good depth of lines. For this purpose, you can use the `gm2600.bin` or `Elo2400.bin` book provided by [Scid vs PC](http://scidvspc.sourceforge.net/), included here for convenience.
 
-Personally, I recommend instead generating an opponent book using games from the Lichess database. For this purpose, you can clone lichapibot's [book builder](https://github.com/lichapibot/lichess-bot) and follow the instructions there. For convenience, I have included a book `dec2015_500k.bin` constructed from a subset of the Lichess database.
+Personally, I recommend instead generating an opponent book using games from the Lichess database. For this purpose, you can clone lichapibot's [book builder](https://github.com/lichapibot/lichess-bot) and follow the instructions there. For convenience, I have included a book `dec2015.bin` constructed from a subset of the Lichess database, though it is rather small due to Github's filesize limit.
 
 Optionally, you may also download an engine such as [Stockfish](https://stockfishchess.org/) to provide analysis when you reach the end of the book.
 
