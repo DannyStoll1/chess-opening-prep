@@ -15,5 +15,5 @@ Optionally, you may also download an engine such as [Stockfish](https://stockfis
 ## Confuguration
 Simply edit the entries in `config.yml` according to your specifications. You can use the "lines" entry to practice particular openings -- this way, you will not be forced to replay the initial moves.
 
-### Copyright Notice:
+## Copyright Notice:
 Book files (Elo2400.bin and gm2600.bin): Pascal Georges
