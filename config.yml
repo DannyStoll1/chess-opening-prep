@@ -1,0 +1,14 @@
+# Paths to book files
+my_book: "goi5.1.bin"
+opp_book: "dec2015_500k.bin"
+
+# Path to engine file
+engine: "sf_latest"
+
+# Whether or not to use preset lines for focused practice
+use_lines: true
+
+# Preset lines from which to start practicing
+lines:
+  - "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6"
+  - "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4"

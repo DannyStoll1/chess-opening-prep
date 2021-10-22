@@ -1,0 +1,4 @@
+cairosvg
+chess
+pixcat
+pyyaml
