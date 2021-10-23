@@ -10,5 +10,24 @@ use_lines: true
 
 # Preset lines from which to start practicing
 lines:
-  - "e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 a6"
-  - "d4 Nf6 c4 g6 Nc3 Bg7 e4 d6 f4"
+  - $hyperaccelerated e4 c5 Nf3 g6 [b]
+  - neo-moller [b]
+  - najdorf [wb]
+  - sveshnikov [wb]
+  - ruy lopez [wb]
+  - albin countergambit [wb]
+# Practice refuting dubious lines
+  - traxler [w]
+  - latvian gambit [w]
+  - marshall gambit [b]
+  - englund gambit [w]
+  - stafford gambit [w]
+  - falkbeer countergambit [w]
+  - philidor countergambit [w]
+  - winawer countergambit [w]
+  - danish gambit [b]
+  - blackmar diemer gambit [b]
+  - benko gambit [wb]
+  - smith-morra gambit [b]
+  - von hennig schara gambit [w]
+  - four pawns [b]

@@ -15,5 +15,7 @@ Optionally, you may also download an engine such as [Stockfish](https://stockfis
 ## Confuguration
 Simply edit the entries in `config.yml` according to your specifications. You can use the "lines" entry to practice particular openings -- this way, you will not be forced to replay the initial moves.
 
+You can add lines to the "lines" entry by adding the name of the opening. A list of known openings is contained in the `known_lines.yml` file. If the desired line is not present, you can either add it to `known_lines.yml` or add a line in `config.yml` of the form `$<line_name_no_spaces> <moves>`.
+
 ## Copyright Notice
 Book files (Elo2400.bin and gm2600.bin): Pascal Georges

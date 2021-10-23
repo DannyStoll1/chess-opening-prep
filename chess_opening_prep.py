@@ -39,14 +39,16 @@ class OpeningPrep():
             my_book,
             opp_book,
             engine = "",
-            line = "",
+            white_lines = {},
+            black_lines = {},
             ):
         """
         color: 'w' or 'b', indicating the player's color
         my_book: path to player's book file
         opp_book: path to opponent's book file
         engine: path to engine for postgame analysis
-        line: line to starting position; use for focused study.
+        white_lines: dict of lines to practice as white
+        black_lines: dict of lines to practice as black
         """
 
         self.board = chess.Board()
@@ -68,10 +70,29 @@ class OpeningPrep():
                 logger.warning(missing_file_msg("engine", engine))
                 self.engine = None
 
-        self.color = chess.WHITE if color=='w' else chess.BLACK
+        if color == 'w':
+            self.color = chess.WHITE
+            if white_lines:
+                self.opening_name, line = random.choice(list(white_lines.items()))
+                starting_moves = line.split(' ')
+            else:
+                name = "Starting Position"
+                starting_moves  = []
+        else:
+            self.color = chess.BLACK
+            if white_lines:
+                self.opening_name, line = random.choice(list(black_lines.items()))
+                starting_moves  = line.split(' ')
+            else:
+                self.opening_name = "Starting Position"
+                starting_moves = []
+
+        print(self.opening_name.capitalize())
+        print(line)
+
         self.last_move = None
 
-        for san in line:
+        for san in starting_moves:
             self.last_move = self.board.parse_san(san)
             self.board.push(self.last_move)
 
@@ -236,13 +257,45 @@ class OpeningPrep():
 
 def main():
     config = load_config("config.yml")
+    known_lines = load_config("known_lines.yml")['known lines']
 
     if config['use_lines']:
         lines = config['lines']
+        white_lines = {}
+        black_lines = {}
+
+        unknown_idx = 0
+        for line in lines:
+            line = line.lower()
+
+            if line == "":
+                continue
+            if line[-1] == ']':
+                line, colorcode = line.rsplit(' ', 1)
+            else:
+                colorcode = 'wb'
+            
+            if line[0] == "$":
+                try:
+                    name, line = line.split(' ', 1)
+                except:
+                    continue
+                name = name[1:].strip()
+                line = line.strip()
+            elif line in known_lines.keys():
+                name = line
+                line = known_lines[name]
+            else:
+                logger.warning(f"Ignoring unrecognized line {line}")
+
+            if 'w' in colorcode:
+                white_lines[name]=line
+            if 'b' in colorcode:
+                black_lines[name]=line
+
         line = random.choice(lines).split(' ')
     else:
-        line = ""
-
+        black_lines = whte_lines = {}
 
 
     color = input("Select your color [w|b]: ")
@@ -251,7 +304,9 @@ def main():
             my_book = config['my_book'],
             opp_book = config['opp_book'],
             engine = config['engine'],
-            line = line)
+            white_lines = white_lines,
+            black_lines = black_lines
+            )
     except FileNotFoundError:
         return
 
