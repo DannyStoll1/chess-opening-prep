@@ -180,7 +180,7 @@ class OpeningPrep():
             move = self.input_move()
             if move is None:
                 continue
-            elif move not in moves.keys() or moves[move] == 0:
+            elif move not in moves.keys() or moves[move] <= 60:
                 response = input("Move appears to be suboptimal.\nPlay anyway? [yes|no|hint|undo|reset|quit] ")
             else:
                 break
