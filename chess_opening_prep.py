@@ -69,6 +69,9 @@ class OpeningPrep():
             except FileNotFoundError as e:
                 logger.warning(missing_file_msg("engine", engine))
                 self.engine = None
+        
+        if color not in ['w', 'b']:
+            color = random.choice(['w', 'b'])
 
         if color == 'w':
             self.color = chess.WHITE
@@ -298,7 +301,7 @@ def main():
         black_lines = whte_lines = {}
 
 
-    color = input("Select your color [w|b]: ")
+    color = input("Select your color [w|b|r]: ")
     try:
         prep = OpeningPrep(color,
             my_book = config['my_book'],
