@@ -6,6 +6,7 @@ import chess.svg
 import chess.engine
 from pixcat import Image
 
+import readline
 import os
 
 import random
@@ -18,7 +19,6 @@ import logging
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
-
 
 def load_config(config_file):
     with open(config_file) as stream:
@@ -41,6 +41,7 @@ class OpeningPrep():
             engine = "",
             white_lines = {},
             black_lines = {},
+            config = {},
             ):
         """
         color: 'w' or 'b', indicating the player's color
@@ -96,8 +97,12 @@ class OpeningPrep():
         self.last_move = None
 
         for san in starting_moves:
+            if san == "":
+                continue
             self.last_move = self.board.parse_san(san)
             self.board.push(self.last_move)
+
+        self.config = config
 
     def line_to_san(self, moves):
         san_line = ""
@@ -122,7 +127,7 @@ class OpeningPrep():
                 multipv = lines)
 
         info = infos[0]
-        
+
         self.engine.quit()
         eval = info["score"].white().score()/100
         pvs = [self.line_to_san(i["pv"])
@@ -199,12 +204,16 @@ class OpeningPrep():
             print("End of line reached!")
             self.conclude_game()
             return False
+        elif self.board.fullmove_number > self.config['max_moves']:
+            print("Max game length reached.")
+            self.conclude_game()
+            return False
 
         while True:
             move = self.input_move()
             if move is None:
                 continue
-            elif move not in moves.keys() or moves[move] <= 60:
+            elif move not in moves.keys() or moves[move] < self.config['allow_move_threshold']:
                 response = input("Move appears to be suboptimal.\nPlay anyway? [yes|no|hint|undo|reset|quit] ")
             else:
                 break
@@ -228,6 +237,10 @@ class OpeningPrep():
         return True
 
     def do_opponent_move(self):
+        if self.board.fullmove_number > self.config['max_moves']:
+            print("Max game length reached.")
+            self.conclude_game()
+            return False
         try:
             move = self.opponent.weighted_choice(self.board).move
         except IndexError:
@@ -277,7 +290,7 @@ def main():
                 line, colorcode = line.rsplit(' ', 1)
             else:
                 colorcode = 'wb'
-            
+
             if line[0] == "$":
                 try:
                     name, line = line.split(' ', 1)
@@ -308,7 +321,8 @@ def main():
             opp_book = config['opp_book'],
             engine = config['engine'],
             white_lines = white_lines,
-            black_lines = black_lines
+            black_lines = black_lines,
+            config=config
             )
     except FileNotFoundError:
         return

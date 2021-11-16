@@ -8,15 +8,22 @@ engine: "sf_latest"
 # Whether or not to use preset lines for focused practice
 use_lines: true
 
+# Minimum move weight to accept as optimal (0-255) (0 allows all moves in book)
+allow_move_threshold: 60
+
+# Maximum number of moves deep to go
+max_moves: 25
+
 # Preset lines from which to start practicing
 lines:
-  - $hyperaccelerated e4 c5 Nf3 g6 [b]
+  - start
+  # - $hyperaccelerated e4 c5 Nf3 g6 [b]
   - neo-moller [b]
   - najdorf [wb]
   - sveshnikov [wb]
   - ruy lopez [wb]
   - benko gambit [wb]
-  - scandinavian [w]
+  # - scandinavian [w]
 # Practice refuting dubious lines
   # - traxler [w]
   # - latvian gambit [w]
