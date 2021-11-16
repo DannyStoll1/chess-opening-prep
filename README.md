@@ -1,6 +1,8 @@
 # chess-opening-prep
 A tool to practice openings using an optimized player book and a high-variance opponent book.
 
+![Example usage](./usage.gif)
+
 ## Installation
 After cloning the repository, run `pip install -r requirements.txt` to download the necessary Python packages.
 
