@@ -1,6 +1,6 @@
 # Paths to book files
 my_book: "goi5.1.bin"
-opp_book: "dec2015_500k.bin"
+opp_book: "dec2015.bin"
 
 # Path to engine file
 engine: "sf_latest"
@@ -16,7 +16,6 @@ max_moves: 25
 
 # Preset lines from which to start practicing
 lines:
-  - start
   # - $hyperaccelerated e4 c5 Nf3 g6 [b]
   - neo-moller [b]
   - najdorf [wb]
